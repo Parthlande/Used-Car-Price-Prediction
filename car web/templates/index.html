@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Price Predictor</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <style>
+        .flip {
+            animation: flipAnimation 1s forwards;
+        }
+
+        @keyframes flipAnimation {
+            from {
+                transform: rotateY(0deg);
+            }
+            to {
+                transform: rotateY(180deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="form-container">
+            <h1>Car Price Predictor</h1>
+            <form id="predictionForm">
+                <label for="Year">Year:</label>
+                <input type="number" id="Year" name="Year" required>
+
+                <label for="Mileage">Mileage (in km):</label>
+                <input type="number" id="Mileage" name="Mileage" required>
+
+                <label for="FuelType">Fuel Type:</label>
+                <select id="FuelType" name="Fuel Type" required>
+                    <option value="Petrol">Petrol</option>
+                    <option value="Diesel">Diesel</option>
+                    <option value="Electric">Electric</option>
+                </select>
+
+                <label for="Transmission">Transmission:</label>
+                <select id="Transmission" name="Transmission" required>
+                    <option value="Manual">Manual</option>
+                    <option value="Automatic">Automatic</option>
+                </select>
+
+                <button type="button" onclick="submitForm()">Predict Price</button>
+            </form>
+            <div id="result"></div>
+        </div>
+        <div class="image-container">
+            <img src="/static/car.jpg" alt="Car" style="filter: drop-shadow(5px 9px 9px rgba(10, 1, 1, 0.5));">
+        </div>
+    </div>
+
+    <script>
+        function submitForm() {
+            const form = document.getElementById('predictionForm');
+            const formData = new FormData(form);
+            const data = Object.fromEntries(formData.entries());
+
+            console.log("Data being sent to the server:", data);
+
+            if (!data['Year'] || !data['Mileage'] || !data['Fuel Type'] || !data['Transmission']) {
+                document.getElementById('result').innerText = 'Please fill in all fields.';
+                return;
+            }
+
+            fetch('/predict', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data),
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (data.error) {
+                    document.getElementById('result').innerText = `Error: ${data.error}`;
+                } else {
+                    document.getElementById('result').innerText = `Predicted Price: Rs${data.predicted_price}`;
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                document.getElementById('result').innerText = 'Error predicting price. Please try again.';
+            });
+             // Add flip animation to the image
+             const image = document.querySelector('.image-container img');
+             image.classList.add('flip');
+ 
+             // Optionally, remove the flip class after the animation completes
+             setTimeout(() => {
+                 image.classList.remove('flip');
+             }, 1000);
+         
+        }
+    </script>
+</body>
+</html>

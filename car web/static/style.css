@@ -1,0 +1,180 @@
+/* Reset default margin and padding */
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden; /* Remove scrollbar */
+}
+
+/* Overall container layout */
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+    flex-wrap: wrap; /* Ensure responsiveness */
+    height: calc(100vh - 40px); /* Full height minus padding */
+    overflow-y: auto; /* Enable scrolling within container */
+    align-items: flex-start; /* Align content to the top of the container */
+}
+
+/* Center the container content */
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 10px 20px;
+}
+
+/* Left section: Form and content */
+.form-container {
+    flex: 1;
+    max-width: 50%;
+    padding: 20px;
+    margin-bottom: 20px; /* Space between form and image */
+}
+
+/* Right section: Image */
+.image-container {
+    flex: 1;
+    max-width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+/* Image styling */
+.image-container img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    
+}
+
+/* Animated gradient background */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(120deg, #f4f4f9, #dfe9f3, #ffefba); /* Gradient colors */
+    background-size: 300% 300%;
+    animation: gradientShift 10s ease infinite; /* Smooth gradient animation */
+    color: #333;
+}
+
+/* Gradient animation keyframes */
+@keyframes gradientShift {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* Fade-in animation for headings */
+h1 {
+    text-align: center;
+    margin-top: 20px;
+    color: #0056b3;
+    font-size: 2em;
+    animation: fadeIn 1s ease; /* New fade-in effect */
+}
+
+/* Slide-in animation for the form */
+form {
+    max-width: 400px;
+    margin: 20px auto;
+    padding: 20px;
+    background: #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    animation: slideIn 1s ease; /* Form slides in on page load */
+}
+
+/* Slide-in keyframes */
+@keyframes slideIn {
+    from {
+        transform: translateY(-30px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Styled labels */
+label {
+    font-size: 14px;
+    margin-bottom: 5px;
+    display: block;
+    color: #555;
+}
+
+/* Glowing input fields on focus */
+input, select {
+    width: calc(100% - 10px);
+    padding: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+    transition: box-shadow 0.3s ease, border-color 0.3s ease; /* Smooth effect */
+}
+
+input:focus, select:focus {
+    outline: none;
+    border-color: #007BFF; /* Border changes to primary color */
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.5); /* Glow effect */
+}
+
+/* Interactive button with hover effect */
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+button:hover {
+    background-color: #0056b3;
+    transform: scale(1.05); /* Slight enlargement on hover */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Adds a shadow */
+}
+
+/* Fade-in animation for the result */
+#result {
+    max-width: 400px;
+    margin: 20px auto;
+    padding: 10px;
+    font-size: 16px;
+    text-align: center;
+    color: green;
+    background: #e6ffe6;
+    border: 1px solid #c7ffc7;
+    border-radius: 8px;
+    animation: fadeIn 0.8s ease; /* Result fades in smoothly */
+}
+
+/* Keyframes for fade-in effect */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
